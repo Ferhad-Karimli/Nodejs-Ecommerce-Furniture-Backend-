@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-ecommerce-furniture-backend-",
+  "version": "1.0.0",
+  "description": "A fully functional backend for a furniture e-commerce platform, built with **Node.js** and **MongoDB**. This project demonstrates my backend development skills, including API design, database management, and integration of key e-commerce features.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ferhad-Karimli/Nodejs-Ecommerce-Furniture-Backend-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ferhad-Karimli/Nodejs-Ecommerce-Furniture-Backend-/issues"
+  },
+  "homepage": "https://github.com/Ferhad-Karimli/Nodejs-Ecommerce-Furniture-Backend-#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "mongoose": "^8.10.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
