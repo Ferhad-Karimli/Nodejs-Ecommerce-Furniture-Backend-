@@ -22,19 +22,19 @@ exports.SliderAdd = async (req, res) => {
   }
 };
 
-exports.sliderEdit = async (req, res) => {
+exports.SliderEdit = async (req, res) => {
   const { error } = sliderValidate(req.body);
 
   if (error) {
     res.status(400).send(error.messages);
   } else {
-    const category = await Category.findByIdAndUpdate(req.params.id);
+    const category = await Slider.findByIdAndUpdate(req.params.id);
     await category.save();
     res.status(200).json(category);
   }
 };
 
-exports.sliderDel = async (req, res) => {
+exports.SliderDel = async (req, res) => {
   const slider = await Slider.findByIdAndDelete(req.params.id);
   if (!slider) {
     return res.status(404).send("Slider not found");
