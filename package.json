@@ -4,6 +4,7 @@
   "description": "A fully functional backend for a furniture e-commerce platform, built with **Node.js** and **MongoDB**. This project demonstrates my backend development skills, including API design, database management, and integration of key e-commerce features.",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --exec bun run server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +26,10 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "nodemon": "^3.1.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
