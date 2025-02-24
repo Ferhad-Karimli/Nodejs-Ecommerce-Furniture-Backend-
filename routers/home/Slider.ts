@@ -4,7 +4,7 @@ const {
   SliderDel,
   SliderEdit,
   SliderList,
-} = require("../../controllers/home/Slider");
+} = require("../../controllers/home/slider");
 
 const router = express.Router();
 

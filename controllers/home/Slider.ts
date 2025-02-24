@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 const { Error } = require("mongoose");
-const { Slider, sliderValidate } = require("../../models/home/Slider");
+const { Slider, sliderValidate } = require("../../models/home/slider");
 
 exports.SliderList = async (req: Request, res: Response) => {
   const slider = await Slider.find();
