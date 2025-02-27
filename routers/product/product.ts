@@ -13,8 +13,8 @@ const router = express.Router();
 
 router.get("/", ProductList);
 router.get("/:id", ProdcutListById);
-router.post("/", upload.array("images", 10), ProductAdd);
-router.put("/:id", upload.array("images", 10), ProductEdit);
+router.post("/", upload.array("logo", 10), ProductAdd);
+router.put("/:id", upload.array("logo", 10), ProductEdit);
 router.delete("/:id", ProductDel);
 
 module.exports = router;

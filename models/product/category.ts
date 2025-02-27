@@ -2,25 +2,21 @@ import Joi from "joi";
 import mongoose, { Schema, Document } from "mongoose";
 
 interface ICategory extends Document {
-  title: string;
+  name: string;
   image: string;
   slug: string;
+  subCategories: mongoose.Types.ObjectId[];
 }
 
 const categorySchema = new Schema(
   {
-    title: String,
-    image: String,
-    slug: String,
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: true,
-    },
-    subCotegories: [
+    name: { type: String, required: true },
+    image: { type: String, required: true },
+    slug: { type: String, required: true },
+    subCategories: [
       {
-        name: { type: String, required: true },
-        description: { type: String },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SubCategory",
       },
     ],
   },
@@ -29,10 +25,10 @@ const categorySchema = new Schema(
 
 const categoryValidate = (category: ICategory) => {
   const schema = Joi.object({
-    title: Joi.string().required(),
+    name: Joi.string().required(),
     image: Joi.string().required(),
     slug: Joi.string().required(),
-    subCotegories: Joi.array().required(),
+    subCategories: Joi.array(),
   });
 
   return schema.validate(category);

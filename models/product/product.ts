@@ -1,8 +1,6 @@
 import Joi from "joi";
 import mongoose, { Schema, Document } from "mongoose";
 
-const express = require("express");
-
 interface IProduct extends Document {
   images: string[];
   title: string;
@@ -11,7 +9,8 @@ interface IProduct extends Document {
   discount: number;
   discountPrice: boolean;
   description: string;
-  categories: string[];
+  category: mongoose.Types.ObjectId;
+  subCategory: mongoose.Types.ObjectId;
   tags: string[];
 }
 
@@ -47,17 +46,15 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  categories: {
-    type: [String],
-    required: true,
-  },
   subCotegory: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "SubCotegory",
+    required: true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
+    required: true,
   },
 
   tags: {
@@ -77,7 +74,7 @@ const productValidate = (product: IProduct) => {
     description: Joi.string().required(),
     sku: Joi.string().required(),
     subCotegory: Joi.string().required(),
-    categories: Joi.array().required(),
+    category: Joi.string().required(),
     tags: Joi.array().required(),
   });
 

@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 const { Product, productValidate } = require("../../models/product/product");
 
 exports.ProductList = async (req: Request, res: Response) => {
-  const product = await Product.find();
+  const product = await Product.find().populate("subCotegory");
   res.status(200).json(product);
 };
 exports.ProdcutListById = async (req: Request, res: Response) => {

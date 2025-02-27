@@ -10,8 +10,20 @@ const PORT = 3007;
 const sliderRouter = require("./routers/home/Slider");
 app.use("/api/slider", sliderRouter);
 
+const headerRouter = require("./routers/home/header");
+app.use("/api/header", headerRouter);
+
+// product
 const productROuter = require("./routers/product/product");
 app.use("/api/product", productROuter);
+
+// category
+const categoryRouter = require("./routers/product/category");
+app.use("/api/category", categoryRouter);
+
+// subcategory
+const subCategoryRouter = require("./routers/product/subcategory");
+app.use("/api/subcategory", subCategoryRouter);
 
 app.use("/uploads", express.static("uploads"));
 
