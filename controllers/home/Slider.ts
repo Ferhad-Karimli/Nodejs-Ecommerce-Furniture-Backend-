@@ -15,6 +15,20 @@ exports.SliderAdd = async (req: Request, res: Response) => {
       return res.status(400).json({ error: error.details[0].message });
     }
 
+    // Ensure title and description have both languages
+    if (
+      !req.body.title?.en ||
+      !req.body.title?.az ||
+      !req.body.description?.en ||
+      !req.body.description?.az
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "Both English and Azerbaijani translations are required for title and description",
+      });
+    }
+
     const slider = new Slider(req.body);
     const savedSlider = await slider.save();
 
@@ -72,6 +86,20 @@ exports.SliderEdit = async (req: Request, res: Response) => {
   if (error) {
     res.status(400).send(error.messages);
   } else {
+    // Ensure title and description have both languages when updating
+    if (
+      !req.body.title?.en ||
+      !req.body.title?.az ||
+      !req.body.description?.en ||
+      !req.body.description?.az
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "Both English and Azerbaijani translations are required for title and description",
+      });
+    }
+
     const category = await Slider.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

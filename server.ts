@@ -1,9 +1,12 @@
+const { languageMiddleware } = require("./middlewares/language");
+
 const express = require("express");
 const cors = require("cors");
 const connectDb = require("./config/connectdb");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(languageMiddleware);
 
 const PORT = 3007;
 
