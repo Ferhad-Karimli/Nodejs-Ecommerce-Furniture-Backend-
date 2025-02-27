@@ -1,3 +1,5 @@
+const validateContentType = require("../../middlewares/validateContentType");
+
 const express = require("express");
 const {
   SliderAdd,
@@ -9,8 +11,8 @@ const {
 const router = express.Router();
 
 router.get("/", SliderList);
-router.post("/", SliderAdd);
-router.put("/:id", SliderEdit);
+router.post("/", validateContentType.validateContentType, SliderAdd);
+router.put("/:id", validateContentType.validateContentType, SliderEdit);
 router.delete("/:id", SliderDel);
 
 module.exports = router;
