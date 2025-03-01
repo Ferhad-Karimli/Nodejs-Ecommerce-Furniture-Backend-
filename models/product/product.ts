@@ -10,7 +10,7 @@ interface IProduct extends Document {
   discountPrice: boolean;
   description: string;
   category: mongoose.Types.ObjectId;
-  subCategory: mongoose.Types.ObjectId;
+  subCategories: mongoose.Types.ObjectId;
   tags: string[];
 }
 
@@ -46,9 +46,9 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  subCotegory: {
+  subCategories: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "SubCotegory",
+    ref: "SubCategory",
     required: true,
   },
   category: {
@@ -73,7 +73,7 @@ const productValidate = (product: IProduct) => {
     discountPrice: Joi.boolean(),
     description: Joi.string().required(),
     sku: Joi.string().required(),
-    subCotegory: Joi.string().required(),
+    subCategories: Joi.string().required(),
     category: Joi.string().required(),
     tags: Joi.array().required(),
   });
