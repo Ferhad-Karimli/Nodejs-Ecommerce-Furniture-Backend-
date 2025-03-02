@@ -6,6 +6,7 @@ const connectDb = require("./config/connectdb");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(languageMiddleware);
 
 const PORT = 3007;
@@ -15,6 +16,9 @@ app.use("/api/slider", sliderRouter);
 
 const headerRouter = require("./routers/home/header");
 app.use("/api/header", headerRouter);
+
+const threeImageRouter = require("./routers/home/threeImage");
+app.use("/api/threeImage", threeImageRouter);
 
 // product
 const productROuter = require("./routers/product/product");
