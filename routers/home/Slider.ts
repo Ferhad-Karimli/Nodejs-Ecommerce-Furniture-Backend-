@@ -7,12 +7,13 @@ const {
   SliderEdit,
   SliderList,
 } = require("../../controllers/home/slider");
+const upload = require("../../middlewares/uploadFile");
 
 const router = express.Router();
 
 router.get("/", SliderList);
-router.post("/", validateContentType.validateContentType, SliderAdd);
-router.put("/:id", validateContentType.validateContentType, SliderEdit);
+router.post("/", upload.single("image"), SliderAdd);
+router.put("/:id", SliderEdit);
 router.delete("/:id", SliderDel);
 
 module.exports = router;

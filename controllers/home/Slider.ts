@@ -9,6 +9,12 @@ exports.SliderList = async (req: Request, res: Response) => {
 
 exports.SliderAdd = async (req: Request, res: Response) => {
   try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No image uploaded" });
+    }
+
+    req.body.image = req.file.path; // Adjust based on your storage setup
+
     const { error } = sliderValidate(req.body);
 
     if (error) {
