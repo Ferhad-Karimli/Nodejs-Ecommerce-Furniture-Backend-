@@ -11,18 +11,8 @@ const router = express.Router();
 const validateContentType = require("../../middlewares/validateContentType");
 
 router.get("/", ThreeImageList);
-router.post(
-  "/",
-  upload.single("image"),
-  validateContentType.validateContentType,
-  ThreeImageAdd
-);
-router.put(
-  "/:id",
-  upload.single("image"),
-  validateContentType.validateContentType,
-  ThreeImageEdit
-);
+router.post("/", upload.single("image"), ThreeImageAdd);
+router.put("/:id", upload.single("image"), ThreeImageEdit);
 router.delete("/:id", ThreeImageDel);
 router.delete("/", ThreeImageDeleteAll);
 module.exports = router;

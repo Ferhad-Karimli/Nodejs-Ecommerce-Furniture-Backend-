@@ -8,13 +8,14 @@ const {
   CategoryDelete,
   CategoryDeleteAll,
 } = require("../../controllers/product/category");
+const upload = require("../../middlewares/uploadFile");
 
 const router = express.Router();
 
 router.get("/", CategoryList);
 router.get("/:id", CategoryListById);
-router.post("/", CategoryAdd);
-router.put("/:id", CategoryUpdate);
+router.post("/", upload.single("image"), CategoryAdd);
+router.put("/:id", upload.single("image"), CategoryUpdate);
 router.delete("/:id", CategoryDelete);
 router.delete("/", CategoryDeleteAll);
 module.exports = router;

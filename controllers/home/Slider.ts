@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 const { Error } = require("mongoose");
 const { Slider, sliderValidate } = require("../../models/home/slider");
+const { deleteSingleOldImage } = require("../../utils/deleteOldImage");
 
 exports.SliderList = async (req: Request, res: Response) => {
   const slider = await Slider.find();
@@ -122,5 +123,6 @@ exports.SliderDel = async (req: Request, res: Response) => {
     return res.status(404).send("Slider not found");
   } else {
     res.status(200).json(slider);
+    deleteSingleOldImage(slider.image);
   }
 };

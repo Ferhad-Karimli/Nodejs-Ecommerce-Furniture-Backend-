@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get("/", SliderList);
 router.post("/", upload.single("image"), SliderAdd);
-router.put("/:id", SliderEdit);
+router.put("/:id", upload.single("image"), SliderEdit);
 router.delete("/:id", SliderDel);
 
 module.exports = router;
