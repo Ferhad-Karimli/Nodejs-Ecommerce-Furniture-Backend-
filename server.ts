@@ -11,6 +11,9 @@ app.use(languageMiddleware);
 
 const PORT = 3007;
 
+const authRouter = require("./routers/auth/user");
+app.use("/", authRouter);
+
 const sliderRouter = require("./routers/home/Slider");
 app.use("/api/slider", sliderRouter);
 
