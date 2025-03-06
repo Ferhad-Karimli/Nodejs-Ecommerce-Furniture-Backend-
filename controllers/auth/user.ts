@@ -50,10 +50,10 @@ exports.authUser = async (req: Request, res: Response) => {
     if (!isSuccess) {
       return res.status(400).send("Email or password is wrong !");
     } else {
-      // const token = user.createAuthToken();
-      // res.header("x-auth-token", token).send(token);
+      const token = user.createAuthToken();
+      res.header("x-auth-token", token).send(token);
 
-      return res.status(200).json({ message: "Login Succesfull" });
+      // return res.status(200).json({ message: "Login Succesfull" });
     }
   }
 };
