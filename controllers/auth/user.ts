@@ -6,6 +6,7 @@ const {
   loginValidate,
 } = require("../../models/auth/user");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 exports.authUser = async (req: Request, res: Response) => {
   const { error } = loginValidate(req.body);
@@ -25,7 +26,6 @@ exports.authUser = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Password is required" });
     }
 
-    // Fetch the user from the database (example)
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -34,8 +34,6 @@ exports.authUser = async (req: Request, res: Response) => {
     if (!password || !user?.password) {
       throw new Error("Password or user password is missing");
     }
-    const first = req.body.password;
-    const second = user?.password;
 
     if (typeof password !== "string" || typeof user?.password !== "string") {
       return res.status(500).json({ message: "Invalid password data" });
@@ -82,10 +80,10 @@ exports.userAdd = async (req: Request, res: Response) => {
         const user = new User(req.body);
         user.password = hashPassword;
 
-        // const token = user.createAuthToken();
+        const token = user.createAuthToken();
         const result = await user.save();
-        // res.status(201).header("x-auth-token", token).json(result);
-        res.status(201).json(result);
+
+        res.status(201).header("x-auth-token", token).json(result);
       }
     }
   }
