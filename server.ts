@@ -23,6 +23,9 @@ app.use("/api/header", headerRouter);
 const threeImageRouter = require("./routers/home/threeImage");
 app.use("/api/threeImage", threeImageRouter);
 
+const comfortImages = require("./routers/home/comfortImages");
+app.use("/api/comfortImages", comfortImages);
+
 // product
 const productROuter = require("./routers/product/product");
 app.use("/api/product", productROuter);

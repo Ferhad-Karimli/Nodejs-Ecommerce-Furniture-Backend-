@@ -1,9 +1,9 @@
 const { fs } = require("fs");
 const { path } = require("path");
 function deleteManyOldImages(imagePaths: string[]): void {
-  imagePaths.forEach((item) => {
-    const fullImagePath = path.join(item);
-    fs.unlink(fullImagePath, (error: NodeJS.ErrnoException | null) => {
+  imagePaths?.forEach((item) => {
+    const fullImagePath = path?.join(item);
+    fs?.unlink(fullImagePath, (error: NodeJS.ErrnoException | null) => {
       if (error) {
         console.log("Error deleting image:", error.message);
       } else {
