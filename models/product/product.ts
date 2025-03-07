@@ -3,15 +3,22 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface IProduct extends Document {
   images: string[];
-  title: string;
+  title: {
+    en: string;
+    az: string;
+  };
   customerReview: string;
   price: number;
   discount: number;
   discountPrice: boolean;
-  description: string;
+  description: {
+    en: string;
+    az: string;
+  };
   category: mongoose.Types.ObjectId;
   subCategories: mongoose.Types.ObjectId;
   tags: string[];
+  bestSeller: boolean;
 }
 
 const productSchema = new Schema({
@@ -20,8 +27,8 @@ const productSchema = new Schema({
     required: true,
   },
   title: {
-    type: String,
-    required: true,
+    en: { type: String, required: true },
+    az: { type: String, required: true },
   },
   customerReview: {
     type: String,
@@ -39,8 +46,8 @@ const productSchema = new Schema({
     type: Boolean,
   },
   description: {
-    type: String,
-    required: true,
+    en: { type: String, required: true },
+    az: { type: String, required: true },
   },
   sku: {
     type: String,
@@ -61,21 +68,40 @@ const productSchema = new Schema({
     type: [String],
     required: true,
   },
+  bestSeller: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const productValidate = (product: IProduct) => {
   const schema = Joi.object({
     images: Joi.array().required(),
-    title: Joi.string().required(),
+    title: Joi.object({
+      en: Joi.string().required().messages({
+        "any.required": "English name is required",
+      }),
+      az: Joi.string().required().messages({
+        "any.required": "Azerbaijani name is required",
+      }),
+    }),
     customerReview: Joi.string().required(),
     price: Joi.number().required(),
     discount: Joi.number().required(),
     discountPrice: Joi.boolean(),
-    description: Joi.string().required(),
+    description: Joi.object({
+      en: Joi.string().required().messages({
+        "any.required": "English name is required",
+      }),
+      az: Joi.string().required().messages({
+        "any.required": "Azerbaijani name is required",
+      }),
+    }),
     sku: Joi.string().required(),
     subCategories: Joi.string().required(),
     category: Joi.string().required(),
     tags: Joi.array().required(),
+    bestSeller: Joi.boolean().required(),
   });
 
   return schema.validate(product);
