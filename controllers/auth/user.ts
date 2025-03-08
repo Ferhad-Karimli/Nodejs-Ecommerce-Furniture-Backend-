@@ -52,8 +52,6 @@ exports.authUser = async (req: Request, res: Response) => {
     } else {
       const token = user.createAuthToken();
       res.header("x-auth-token", token).send(token);
-
-      // return res.status(200).json({ message: "Login Succesfull" });
     }
   }
 };

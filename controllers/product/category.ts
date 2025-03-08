@@ -42,6 +42,7 @@ exports.CategoryList = async (req: Request, res: Response) => {
 };
 
 exports.CategoryListById = async (req: Request, res: Response) => {
+  console.log(req, "req");
   try {
     const lang = (req.query.lang as string) || "en";
     const category = await Category.findById(req.params.id);
@@ -55,12 +56,17 @@ exports.CategoryListById = async (req: Request, res: Response) => {
     };
     res.status(200).json(localizedCategory);
   } catch (error: any) {
+    console.log("this catch");
     res.status(500).json({ error: error.message });
   }
 };
 
 exports.CategoryAdd = async (req: Request, res: Response) => {
   try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No image uploaded" });
+    }
+    req.body.image = req.file.path;
     const { error } = categoryValidate(req.body);
     if (error) {
       return res.status(400).json({
