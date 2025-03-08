@@ -41,18 +41,17 @@ exports.CategoryList = async (req: Request, res: Response) => {
   }
 };
 
-exports.CategoryListById = async (req: Request, res: Response) => {
-  console.log(req, "req");
+exports.CategoryListBySlug = async (req: Request, res: Response) => {
+  console.log(req.params, "req");
   try {
     const lang = (req.query.lang as string) || "en";
-    const category = await Category.findById(req.params.id);
+    const category = await Category.findOne({ slug: req.params.slug });
     if (!category) {
       return res.status(404).json({ error: "Category not found" });
     }
     const localizedCategory = {
       ...category.toObject(),
       name: category.name[lang],
-      description: category.description[lang],
     };
     res.status(200).json(localizedCategory);
   } catch (error: any) {

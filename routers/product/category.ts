@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 const express = require("express");
 const {
   CategoryList,
-  CategoryListById,
+  CategoryListBySlug,
   CategoryAdd,
   CategoryUpdate,
   CategoryDelete,
@@ -13,7 +13,7 @@ const upload = require("../../middlewares/uploadFile");
 const router = express.Router();
 
 router.get("/", CategoryList);
-router.get("/:id", CategoryListById);
+router.get("/:slug", CategoryListBySlug);
 router.post("/", upload.single("image"), CategoryAdd);
 router.put("/:id", upload.single("image"), CategoryUpdate);
 router.delete("/:id", CategoryDelete);
