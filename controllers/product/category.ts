@@ -42,7 +42,6 @@ exports.CategoryList = async (req: Request, res: Response) => {
 };
 
 exports.CategoryListBySlug = async (req: Request, res: Response) => {
-  console.log(req.params, "req");
   try {
     const lang = (req.query.lang as string) || "en";
     const category = await Category.findOne({ slug: req.params.slug });

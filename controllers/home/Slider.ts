@@ -10,11 +10,11 @@ exports.SliderList = async (req: Request, res: Response) => {
 
 exports.SliderAdd = async (req: Request, res: Response) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
-    }
-
-    req.body.image = req.file.path; // Adjust based on your storage setup
+    // uploded as file
+    // if (!req.file) {
+    //   return res.status(400).json({ error: "No image uploaded" });
+    // }
+    // req.body.image = req.file.path.replace(/\\/g, "/");
 
     const { error } = sliderValidate(req.body);
 
@@ -123,6 +123,7 @@ exports.SliderDel = async (req: Request, res: Response) => {
     return res.status(404).send("Slider not found");
   } else {
     res.status(200).json(slider);
+    console.log(slider);
     deleteSingleOldImage(slider.image);
   }
 };
