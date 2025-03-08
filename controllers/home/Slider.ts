@@ -15,6 +15,7 @@ exports.SliderAdd = async (req: Request, res: Response) => {
     //   return res.status(400).json({ error: "No image uploaded" });
     // }
     // req.body.image = req.file.path.replace(/\\/g, "/");
+    // uploded as file
 
     const { error } = sliderValidate(req.body);
 

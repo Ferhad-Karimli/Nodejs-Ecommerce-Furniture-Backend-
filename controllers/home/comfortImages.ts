@@ -12,11 +12,13 @@ exports.ComfortImagesList = async (req: Request, res: Response) => {
 
 exports.ComfortImagesAdd = async (req: Request, res: Response) => {
   try {
-    if (req.files && Array.isArray(req.files)) {
-      req.body.images = (req.files as Express.Multer.File[]).map(
-        (file) => file.path
-      );
-    }
+    // uploded as files
+    // if (req.files && Array.isArray(req.files)) {
+    //   req.body.images = (req.files as Express.Multer.File[]).map(
+    //     (file) => file.path
+    //   );
+    // }
+    // uploded as files
     const { error } = comfortImagesValidate(req.body);
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
@@ -74,11 +76,13 @@ exports.ComfortImagesAdd = async (req: Request, res: Response) => {
 };
 
 exports.ComfortImagesEdit = async (req: Request, res: Response) => {
-  if (req.files && Array.isArray(req.files)) {
-    req.body.images = (req.files as Express.Multer.File[]).map(
-      (file) => file.path
-    );
-  }
+  // uploded as files
+  //   if (req.files && Array.isArray(req.files)) {
+  //     req.body.images = (req.files as Express.Multer.File[]).map(
+  //       (file) => file.path
+  //     );
+  //   }
+  // uploded as files
   const { error } = comfortImagesValidate(req.body);
   if (error) {
     res.status(400).send(error.messages);
@@ -108,7 +112,7 @@ exports.ComfortImagesEdit = async (req: Request, res: Response) => {
 
 exports.ComfortImagesDel = async (req: Request, res: Response) => {
   const threeImage = await ComfortImages.findByIdAndDelete(req.params.id);
-  console.log(threeImage, "threeImage");
+
   if (!threeImage) {
     return res.status(404).send("Data not found");
   } else {

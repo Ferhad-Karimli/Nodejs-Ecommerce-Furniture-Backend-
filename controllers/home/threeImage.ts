@@ -12,15 +12,8 @@ exports.ThreeImageList = async (req: Request, res: Response) => {
 
 exports.ThreeImageAdd = async (req: Request, res: Response) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
-    }
-
-    req.body.image = req.file.path; // Adjust based on your storage setup
-
     const { error } = threeImageValidate(req.body);
     if (error) {
-      console.log(req.body, "req body");
       return res.status(400).json({ error: error.details[0].message });
     }
     if (!req.body.title.az || !req.body.title?.en) {
