@@ -123,8 +123,27 @@ exports.SliderDel = async (req: Request, res: Response) => {
   if (!slider) {
     return res.status(404).send("Slider not found");
   } else {
-    res.status(200).json(slider);
-    console.log(slider);
-    deleteSingleOldImage(slider.image);
+    await res.status(200).json(slider);
   }
 };
+
+// exports.SliderDel = async (req: Request, res: Response) => {
+//   try {
+//     const slider = await Slider.findByIdAndDelete(req.params.id);
+
+//     if (!slider) {
+//       return res.status(404).json({ error: "Slider not found" });
+//     }
+
+//     if (slider.image) {
+//       await deleteSingleOldImage(slider.image);
+//     } else {
+//       console.log("No image found in slider document");
+//     }
+
+//     return res.status(200).json(slider);
+//   } catch (error) {
+//     console.error("Error deleting slider:", error);
+//     return res.status(500).json({ error: "Internal server error" });
+//   }
+// };
