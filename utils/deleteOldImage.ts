@@ -12,15 +12,9 @@ function deleteManyOldImages(imagePaths: string[]): void {
     });
   });
 }
-function deleteSingleOldImage(imagePath?: string): void {
-  if (!imagePath) {
-    console.log("No image to delete");
-    return;
-  }
-
-  const fullImagePath = path.join(__dirname, "..", imagePath); // Adjust path if needed
-
-  fs.unlink(fullImagePath, (error: Error) => {
+function deleteSingleOldImage(imagePath: string): void {
+  const fullImagePath = path?.join(imagePath);
+  fs.unlink(fullImagePath, (error: NodeJS.ErrnoException | null) => {
     if (error) {
       console.log("Error deleting image:", error.message);
     } else {

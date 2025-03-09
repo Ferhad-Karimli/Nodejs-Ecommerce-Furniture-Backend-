@@ -124,13 +124,14 @@ exports.ComfortImagesDel = async (req: Request, res: Response) => {
 exports.ComfortImagesAll = async (req: Request, res: Response) => {
   try {
     const allDocuments = await ComfortImages.find();
-    const allImages = await allDocuments.flatMap(
-      (doc: any) => doc.images || []
-    );
+
+    // for file url
+    // const allImages = await allDocuments.flatMap(
+    //   (doc: any) => doc.images || []
+    // );
+    // for file url
     await ComfortImages.deleteMany();
-    await deleteManyOldImages(allImages);
     res.status(200).json({ message: "All datas removed succesfully" });
-    await deleteManyOldImages(allImages);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

@@ -119,31 +119,22 @@ exports.SliderEdit = async (req: Request, res: Response) => {
 };
 
 exports.SliderDel = async (req: Request, res: Response) => {
-  const slider = await Slider.findByIdAndDelete(req.params.id);
-  if (!slider) {
-    return res.status(404).send("Slider not found");
-  } else {
-    await res.status(200).json(slider);
+  try {
+    const slider = await Slider.findByIdAndDelete(req.params.id);
+
+    if (!slider) {
+      return res.status(404).json({ error: "Slider not found" });
+    }
+
+    // if (slider.image) {
+    //   await deleteSingleOldImage(slider.image);
+    // } else {
+    //   console.log("No image found in slider document");
+    // }
+
+    return res.status(200).json(slider);
+  } catch (error) {
+    console.error("Error deleting slider:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
-
-// exports.SliderDel = async (req: Request, res: Response) => {
-//   try {
-//     const slider = await Slider.findByIdAndDelete(req.params.id);
-
-//     if (!slider) {
-//       return res.status(404).json({ error: "Slider not found" });
-//     }
-
-//     if (slider.image) {
-//       await deleteSingleOldImage(slider.image);
-//     } else {
-//       console.log("No image found in slider document");
-//     }
-
-//     return res.status(200).json(slider);
-//   } catch (error) {
-//     console.error("Error deleting slider:", error);
-//     return res.status(500).json({ error: "Internal server error" });
-//   }
-// };

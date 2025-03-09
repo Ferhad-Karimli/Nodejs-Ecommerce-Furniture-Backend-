@@ -103,7 +103,6 @@ exports.ThreeImageDel = async (req: Request, res: Response) => {
     return res.status(404).send("Data not found");
   } else {
     res.status(200).json(threeImage);
-    deleteSingleOldImage(threeImage.image);
   }
 };
 
