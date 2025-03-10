@@ -15,6 +15,7 @@ interface IProduct extends Document {
     en: string;
     az: string;
   };
+  slug: string;
   category: mongoose.Types.ObjectId;
   subCategories: mongoose.Types.ObjectId;
   tags: string[];
@@ -72,6 +73,10 @@ const productSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  slug: {
+    type: String,
+    required: true,
+  },
 });
 
 const productValidate = (product: IProduct) => {
@@ -97,6 +102,7 @@ const productValidate = (product: IProduct) => {
         "any.required": "Azerbaijani name is required",
       }),
     }),
+    slug: Joi.string().required(),
     sku: Joi.string().required(),
     subCategories: Joi.string().required(),
     category: Joi.string().required(),

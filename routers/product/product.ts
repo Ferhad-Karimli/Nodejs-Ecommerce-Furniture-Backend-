@@ -5,14 +5,14 @@ const {
   ProductDel,
   ProductEdit,
   ProductList,
-  ProdcutListById,
+  ProdcutListBySlug,
 } = require("../../controllers/product/product");
 const upload = require("../../middlewares/uploadFile");
 
 const router = express.Router();
 
 router.get("/", ProductList);
-router.get("/:id", ProdcutListById);
+router.get("/:slug", ProdcutListBySlug);
 router.post("/", upload.array("logo", 10), ProductAdd);
 router.put("/:id", upload.array("logo", 10), ProductEdit);
 router.delete("/:id", ProductDel);

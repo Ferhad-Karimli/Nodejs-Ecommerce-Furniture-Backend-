@@ -11,7 +11,7 @@ const connectDb = async () => {
     await mongoose.connect(
       `mongodb+srv://${authdb.username}:${authdb.password}@productcluster.jgvb8.mongodb.net/?retryWrites=true&w=majority&appName=${authdb.cluster}`,
       {
-        // useNewUrlParser: true,
+        useNewUrlParser: true,
         useUnifiedTopology: true,
       }
     );

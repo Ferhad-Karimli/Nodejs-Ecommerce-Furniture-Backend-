@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 const express = require("express");
 const {
   SubCategoryList,
-  SubCategoryListById,
+  SubCategoryListBySlug,
   SubCategoryAdd,
   SubCategoryUpdate,
   SubCategoryDelete,
@@ -11,7 +11,7 @@ const {
 const router = express.Router();
 
 router.get("/", SubCategoryList);
-router.get("/:id", SubCategoryListById);
+router.get("/:slug", SubCategoryListBySlug);
 router.post("/", SubCategoryAdd);
 router.put("/:id", SubCategoryUpdate);
 router.delete("/:id", SubCategoryDelete);

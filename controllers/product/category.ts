@@ -17,7 +17,7 @@ exports.CategoryList = async (req: Request, res: Response) => {
           options: { limit: 10 },
         },
       })
-      .populate("")
+      .populate({ path: "products" })
       .skip((page - 1) * limit)
       .limit(limit);
 

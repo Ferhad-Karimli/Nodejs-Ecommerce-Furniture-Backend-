@@ -6,6 +6,7 @@ interface ISubCategory extends Document {
     en: string;
     az: string;
   };
+  slug: string;
   count: string;
   category: mongoose.Types.ObjectId;
   products: mongoose.Types.ObjectId[];
@@ -19,6 +20,7 @@ const subCategoryShcema = new Schema({
       required: true,
     },
   },
+  slug: { type: String, required: true },
   count: {
     type: Number,
     default: 0,
@@ -51,6 +53,7 @@ const subCategoryValidate = (subCategory: ISubCategory) => {
         "any.required": "Azerbaijani name is required",
       }),
     }),
+    slug: Joi.string().required(),
     count: Joi.number().required(),
     category: Joi.string().required(),
     products: Joi.array().optional(),
