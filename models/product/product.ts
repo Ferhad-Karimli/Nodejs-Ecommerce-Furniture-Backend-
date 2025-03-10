@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface IProduct extends Document {
   images: string[];
+  coverImage: String;
   title: {
     en: string;
     az: string;
@@ -25,6 +26,10 @@ interface IProduct extends Document {
 const productSchema = new Schema({
   images: {
     type: [String],
+    required: true,
+  },
+  coverImage: {
+    type: String,
     required: true,
   },
   title: {
@@ -82,6 +87,7 @@ const productSchema = new Schema({
 const productValidate = (product: IProduct) => {
   const schema = Joi.object({
     images: Joi.array().required(),
+    coverImage: Joi.string().required(),
     title: Joi.object({
       en: Joi.string().required().messages({
         "any.required": "English name is required",

@@ -13,8 +13,22 @@ const router = express.Router();
 
 router.get("/", ProductList);
 router.get("/:slug", ProdcutListBySlug);
-router.post("/", upload.array("logo", 10), ProductAdd);
-router.put("/:id", upload.array("logo", 10), ProductEdit);
+router.post(
+  "/",
+  upload.fields([
+    { name: "images", maxCount: 10 },
+    { name: "coverImage", maxCount: 1 },
+  ]),
+  ProductAdd
+);
+router.put(
+  "/:id",
+  upload.fields([
+    { name: "images", maxCount: 10 },
+    { name: "coverImage", maxCount: 1 },
+  ]),
+  ProductEdit
+);
 router.delete("/:id", ProductDel);
 
 module.exports = router;
