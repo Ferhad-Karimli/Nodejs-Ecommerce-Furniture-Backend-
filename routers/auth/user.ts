@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post("/api/register", userAdd);
 router.post("/api/login", authUser);
-router.get("/api/users", [auth, isAdmin], userList);
+router.get("/api/users", userList);
 router.get("/:id", [auth, isAdmin], singleUser);
 
 module.exports = router;

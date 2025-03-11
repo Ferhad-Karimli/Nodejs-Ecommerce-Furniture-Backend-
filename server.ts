@@ -14,6 +14,14 @@ const PORT = 3007;
 const authRouter = require("./routers/auth/user");
 app.use("/", authRouter);
 
+// ubwo
+
+const wishListRouter = require("./routers/ubwo/wishlist");
+app.use("/api/wishlist", wishListRouter);
+
+const basketRouter = require("./routers/ubwo/basket");
+app.use("/api/basket", basketRouter);
+
 const sliderRouter = require("./routers/home/Slider");
 app.use("/api/slider", sliderRouter);
 
