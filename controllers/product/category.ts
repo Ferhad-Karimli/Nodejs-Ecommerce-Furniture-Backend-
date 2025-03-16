@@ -61,10 +61,6 @@ exports.CategoryListBySlug = async (req: Request, res: Response) => {
 
 exports.CategoryAdd = async (req: Request, res: Response) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
-    }
-    req.body.image = req.file.path;
     const { error } = categoryValidate(req.body);
     if (error) {
       return res.status(400).json({
