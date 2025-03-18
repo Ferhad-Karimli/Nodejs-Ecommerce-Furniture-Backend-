@@ -11,16 +11,12 @@ app.use(languageMiddleware);
 
 const PORT = 3007;
 
+//auth
+
 const authRouter = require("./routers/auth/user");
 app.use("/", authRouter);
 
-// ubwo
-
-const wishListRouter = require("./routers/ubwo/wishlist");
-app.use("/api/wishlist", wishListRouter);
-
-const basketRouter = require("./routers/ubwo/basket");
-app.use("/api/basket", basketRouter);
+//home
 
 const sliderRouter = require("./routers/home/Slider");
 app.use("/api/slider", sliderRouter);
@@ -35,16 +31,26 @@ const comfortImages = require("./routers/home/comfortImages");
 app.use("/api/comfortImages", comfortImages);
 
 // product
+
 const productROuter = require("./routers/product/product");
 app.use("/api/product", productROuter);
 
-// category
 const categoryRouter = require("./routers/product/category");
 app.use("/api/category", categoryRouter);
 
-// subcategory
 const subCategoryRouter = require("./routers/product/subcategory");
 app.use("/api/subcategory", subCategoryRouter);
+
+// ubwo
+
+const wishListRouter = require("./routers/ubwo/wishlist");
+app.use("/api/wishlist", wishListRouter);
+
+const basketRouter = require("./routers/ubwo/basket");
+app.use("/api/basket", basketRouter);
+
+const orderRouter = require("./routers/ubwo/order");
+app.use("api/order", orderRouter);
 
 app.use("/uploads", express.static("uploads"));
 
