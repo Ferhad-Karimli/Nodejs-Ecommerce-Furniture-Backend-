@@ -5,6 +5,7 @@ interface IOrder extends Document {
   user: mongoose.Types.ObjectId;
   product: mongoose.Types.ObjectId[];
   totalPrice: number;
+  status?: string;
 }
 
 const orderSchema = new Schema(
@@ -12,11 +13,13 @@ const orderSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     product: [
       {
         type: Schema.Types.ObjectId,
         ref: "Product",
+        required: true,
       },
     ],
     totalPrice: {
@@ -24,8 +27,9 @@ const orderSchema = new Schema(
       required: true,
     },
     status: {
-      default: "pending",
+      type: String,
       enum: ["completed", "pending", "cancel"],
+      default: "pending",
     },
   },
   { timestamps: true }
@@ -33,10 +37,10 @@ const orderSchema = new Schema(
 
 const orderValidate = (data: IOrder) => {
   const schema = Joi.object({
-    product: Joi.string().trim().required(),
+    product: Joi.array().items(Joi.string().trim().required()).required(),
     user: Joi.string().trim().required(),
-    totalPrice: Joi.string().trim().required(),
-    status: Joi.string(),
+    totalPrice: Joi.number().required(),
+    status: Joi.string().valid("completed", "pending", "cancel"),
   });
 
   return schema.validate(data);

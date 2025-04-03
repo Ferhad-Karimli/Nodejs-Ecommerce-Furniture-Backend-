@@ -6,37 +6,25 @@ exports.CategoryList = async (req: Request, res: Response) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    const lang = (req.query.lang as string) || "en";
 
     const categories = await Category.find()
-      .populate({
-        path: "subCategories",
-        select: "name , products -_id",
-        populate: {
-          path: "products",
-          options: { limit: 10 },
-        },
-      })
-      .populate({ path: "products" })
-      .skip((page - 1) * limit)
-      .limit(limit);
-
-    const localizedCategories = categories.map((category: any) => ({
-      ...category.toObject(),
-      name: category.name[lang],
-    }));
-
-    const total = await Category.countDocuments();
-
-    res.status(200).json({
-      categories: localizedCategories,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(total / limit),
-        totalCategories: total,
+    .populate({
+      path: "subCategories",
+      select: "name , products -_id",
+      populate: {
+        path: "products",
+        options: { limit: 10 },
       },
-    });
-  } catch (error: any) {
+    })
+    .populate({ path: "products" })
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+
+    res.status(200).json(categories)
+
+  
+  }catch(error:any){
     res.status(500).json({ error: error.message });
   }
 };

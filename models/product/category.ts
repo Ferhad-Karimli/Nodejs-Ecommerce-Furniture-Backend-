@@ -39,13 +39,9 @@ const categorySchema = new Schema(
 const categoryValidate = (category: ICategory) => {
   const schema = Joi.object({
     name: Joi.object({
-      en: Joi.string().required().messages({
-        "any.required": "English name is required",
-      }),
-      az: Joi.string().required().messages({
-        "any.required": "Azerbaijani name is required",
-      }),
-    }).required(),
+          en: Joi.string().required(),
+          az: Joi.string().required(),
+        }).required(),
     image: Joi.string().required(),
     slug: Joi.string().required(),
     subCategories: Joi.array().optional(),
