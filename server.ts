@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(languageMiddleware);
 
-const PORT = process.env.PORT || 3007;
+const PORT = process.env.PORT || 3000
 
 // Default route for "/"
 app.get("/", (req:any, res:any) => {
