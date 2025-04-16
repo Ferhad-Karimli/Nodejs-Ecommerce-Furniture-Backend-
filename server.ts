@@ -19,8 +19,8 @@ app.get("/", (req:any, res:any) => {
 
 //auth
 
-const authRouter = require("./routers/auth/user");
-app.use("/", authRouter);
+// const authRouter = require("./routers/auth/user");
+// app.use("/", authRouter);
 
 //home
 
