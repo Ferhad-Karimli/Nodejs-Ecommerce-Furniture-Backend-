@@ -1,3 +1,5 @@
+require("dotenv").config();
+const path = require("path");
 const { languageMiddleware } = require("./middlewares/language");
 
 const express = require("express");
@@ -56,7 +58,7 @@ const basketRouter = require("./routers/ubwo/basket");
 app.use("/api/basket", basketRouter);
 
 const orderRouter = require("./routers/ubwo/order");
-app.use("api/order", orderRouter);
+app.use("/api/order", orderRouter);
 
 app.use("/uploads", express.static("uploads"));
 
