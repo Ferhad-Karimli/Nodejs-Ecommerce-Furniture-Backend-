@@ -9,7 +9,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(languageMiddleware);
 
-const PORT = 3007;
+const PORT = process.env.PORT || 3007;
+
+// Default route for "/"
+app.get("/", (req:any, res:any) => {
+  res.status(200).send("Welcome to the Node.js E-commerce Furniture Backend API!");
+});
+
 
 //auth
 
