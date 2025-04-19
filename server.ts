@@ -2,27 +2,35 @@ require("dotenv").config();
 const path = require("path");
 const { languageMiddleware } = require("./middlewares/language");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output.json"); // Avtomatik yaradılan fayl
+
+
+
 const express = require("express");
 const cors = require("cors");
 const connectDb = require("./config/connectdb");
 const app = express();
 app.use(cors());
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(languageMiddleware);
 
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+
 const PORT = process.env.PORT || 3000
 
-// Default route for "/"
-app.get("/", (req:any, res:any) => {
-  res.status(200).send("Welcome to the Node.js E-commerce Furniture Backend API!");
-});
+
 
 
 //auth
 
-// const authRouter = require("./routers/auth/user");
-// app.use("/", authRouter);
+const authRouter = require("./routers/auth/user");
+app.use("/", authRouter);
 
 //home
 
